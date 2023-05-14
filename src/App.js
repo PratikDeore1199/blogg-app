@@ -2,17 +2,24 @@
 import { useState } from "react";
 import Blogs from "./components/Blogs";
 import Modal from "./components/Modal";
+import CreateBloggForm from "./components/CreateBloggForm";
 
 function App() {
-  const [showCreateModal, setShowCreateModal]=useState(false)
+  const [bloggs, setBloggs]=useState([])
+  const [showCreateModal, setShowCreateModal]=useState(false);
+ /* const showModal =()=>{
+    setShowCreateModal(true)
+  }*/
   return (
-  <div className="m-6">
-    <Blogs></Blogs>
-    <Modal show={showCreateModal} onClose={()=>{setShowCreateModal(false)
-    }}><Blogs></Blogs></Modal>
-    <button  onClick={()=>{
+  
+  <div className="m-20">
+     <button  onClick={()=>{
      setShowCreateModal(true)
-    }}>create</button>
+    }} className="bg-blue-700 text-black hover:bg-red-600 rounded-lg p-1 mb-2">Create Blogg</button>
+    <Blogs bloggs={bloggs}/>
+    <Modal show={showCreateModal} onClose={()=>{setShowCreateModal(false)
+    }}><CreateBloggForm setBloggs={setBloggs}/></Modal>
+    
   </div>
   );
 }
