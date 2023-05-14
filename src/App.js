@@ -1,10 +1,18 @@
 
-import './App.css';
-
+import Blogs from "./components/Blogs";
 function App() {
   return (
-     <h1 className='text-green-500 text-4xl'> hello there</h1>
+  <div className="m-6">
+    <Blogs></Blogs>
+  </div>
   );
 }
 
 export default App;
+/**
+ * blogg details
+ * create blogg form
+ * view blogg
+ * submit button
+ * input
+ */
