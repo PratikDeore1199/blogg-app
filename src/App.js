@@ -3,10 +3,12 @@ import { useState } from "react";
 import Blogs from "./components/Blogs";
 import Modal from "./components/Modal";
 import CreateBloggForm from "./components/CreateBloggForm";
+import BlogDetails from "./components/BloggDetails";
 
 function App() {
   const [bloggs, setBloggs]=useState([])
   const [showCreateModal, setShowCreateModal]=useState(false);
+  const [bloggIndex, setBloggIndex]=useState(-1)
   const showModal =()=>{
     setShowCreateModal(true)
   }
@@ -28,10 +30,15 @@ function App() {
         </button>
     </div>
     <hr className="mt-6"/>
-    <Blogs bloggs={bloggs}/>
+    <Blogs bloggs={bloggs} setBloggIndex={setBloggIndex} />
     <Modal show={showCreateModal} onClose={()=>{setShowCreateModal(false)
     }}><CreateBloggForm setBloggs={setBloggs} onCloseForm={closeModal}/></Modal>
-    
+    <Modal show={bloggIndex > -1}
+    onClose={()=>{
+      setBloggIndex(-1)
+      }}>
+        <BlogDetails bloggDetails={bloggs[bloggIndex]}/>
+    </Modal>
   </div>
   );
 }

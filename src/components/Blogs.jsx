@@ -4,7 +4,10 @@ const Blogs=(props)=>{
     <div className=" mt-6 grid grid-cols-2 gap-12">
         {props.bloggs.map((blogg,i) => {
             
-              return  <BloggCard key={i} date={blogg.date} title={blogg.title} intro={blogg.intro}></BloggCard>
+              return  <BloggCard key={i} date={blogg.date} title={blogg.title} intro={blogg.intro}
+              showBloggDetails={()=>{
+                props.setBloggIndex(i)
+              }}></BloggCard>
             
         })}
 
