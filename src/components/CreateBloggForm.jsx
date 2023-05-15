@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 const CreateBloggForm = (props) => {
-  const [title, setTitle] = useState("");
-  const [intro, setIntro] = useState("");
-  const [content, setContent] = useState("");
-  const [imgURL, setImgURL] = useState("");
+  const [title, setTitle] = useState(props.blogg?.title || '');
+  const [intro, setIntro] = useState(props.blogg?.intro || '');
+  const [content, setContent] = useState(props.blogg?.description || '');
+  const [imgURL, setImgURL] = useState(props.blogg?.imgURL || '');
   return (
     <div>
       <h1 className="font-bold text-2xl"> Blogg Details Form</h1>
@@ -63,7 +63,16 @@ const CreateBloggForm = (props) => {
 
           <button
             className="ml-2 p-2 text-white bg-green-700 border-black rounded-xl hover:bg-green-500"
-            onClick={() => {props.setBloggs(prev=>[{date:new Date(),title,description:content,intro,imgURL},...prev])
+            onClick={() => {
+            if(props.blogg){
+              props.setBloggs(prev => prev.map((ele,i)=>{
+                if(i===props.editBloggIndex){
+                  return {date:new Date(),title,description:content,intro,imgURL} 
+                } 
+                return ele
+              }))
+            } else {
+            props.setBloggs(prev=>[{date:new Date(),title,description:content,intro,imgURL},...prev])}
             props.onCloseForm()
             }}
           >

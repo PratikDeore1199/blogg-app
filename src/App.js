@@ -4,11 +4,13 @@ import Blogs from "./components/Blogs";
 import Modal from "./components/Modal";
 import CreateBloggForm from "./components/CreateBloggForm";
 import BlogDetails from "./components/BloggDetails";
+import Button from "./components/Button";
 
 function App() {
   const [bloggs, setBloggs]=useState([])
   const [showCreateModal, setShowCreateModal]=useState(false);
   const [bloggIndex, setBloggIndex]=useState(-1)
+  const [editBloggIndex, setEditBloggIndex]=useState(-1)
   const showModal =()=>{
     setShowCreateModal(true)
   }
@@ -30,14 +32,38 @@ function App() {
         </button>
     </div>
     <hr className="mt-6"/>
-    <Blogs bloggs={bloggs} setBloggIndex={setBloggIndex} />
-    <Modal show={showCreateModal} onClose={()=>{setShowCreateModal(false)
-    }}><CreateBloggForm setBloggs={setBloggs} onCloseForm={closeModal}/></Modal>
+    <Blogs 
+     bloggs={bloggs} 
+     setBloggIndex={setBloggIndex} 
+     />
+    <Modal show={showCreateModal} onClose={()=>{setShowCreateModal(false)}}>
+      <CreateBloggForm 
+        setBloggs={setBloggs} 
+        onCloseForm={closeModal} 
+        blogg={bloggs[editBloggIndex]}
+        editBloggIndex={editBloggIndex}
+      />
+    </Modal>
     <Modal show={bloggIndex > -1}
     onClose={()=>{
       setBloggIndex(-1)
       }}>
         <BlogDetails bloggDetails={bloggs[bloggIndex]}/>
+        <div className="flex justify-end items-center gap-2 mt-6">
+          <Button onClick={()=>{
+            setEditBloggIndex(bloggIndex)
+            setBloggIndex(-1)
+            setShowCreateModal(true)
+          }} text="Edit" color="blue"/>
+          <Button onClick={()=>{
+            setBloggs(prev=>{
+              return prev.filter((ele,i)=> {
+                return i!==bloggIndex
+              })
+            })
+            setBloggIndex(-1)
+          }} text="Delete" color="red"/>
+        </div>
     </Modal>
   </div>
   );
