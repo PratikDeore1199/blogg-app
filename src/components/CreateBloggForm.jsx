@@ -56,13 +56,15 @@ const CreateBloggForm = (props) => {
         <br />
 
         <div className="mt-4 float-right">
-          <button className="p-2 text-gray border border-gray-400 rounded-xl hover:bg-gray-200">
+          <button className="p-2 text-gray border border-gray-400 rounded-xl hover:bg-gray-200"
+          onClick={props.onCloseForm}>
             Cancel
           </button>
 
           <button
             className="ml-2 p-2 text-white bg-green-700 border-black rounded-xl hover:bg-green-500"
             onClick={() => {props.setBloggs(prev=>[{date:new Date(),title,description:content,intro,imgURL},...prev])
+            props.onCloseForm()
             }}
           >
             Submit
