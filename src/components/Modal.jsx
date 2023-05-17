@@ -7,7 +7,7 @@ export default function Modal(props) {
 
 
   return (
-    <>
+    
 
 
       <Transition appear show={props.show} as={Fragment}>
@@ -43,6 +43,6 @@ export default function Modal(props) {
           </div>
         </Dialog>
       </Transition>
-    </>
+    
   )
 }
